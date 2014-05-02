@@ -10,8 +10,73 @@
 #include "SENNA_POS.h"
 #include "SENNA_API.h"
 
+typedef struct {
+  /* SENNA inputs */
+  SENNA_Hash *word_hash;
+  SENNA_Hash *caps_hash;
+  SENNA_Hash *suff_hash;
+  SENNA_Hash *gazt_hash;
+  SENNA_Hash *gazl_hash;
+  SENNA_Hash *gazm_hash;
+  SENNA_Hash *gazo_hash;
+  SENNA_Hash *gazp_hash;
+  /* SENNA labels */
+  SENNA_Hash *pos_hash;
+  SENNA_Hash *chk_hash;
+  SENNA_Hash *pt0_hash;
+  SENNA_Hash *ner_hash;
+  SENNA_Hash *vbs_hash;
+  SENNA_Hash *srl_hash;
+  SENNA_Hash *psg_left_hash;
+  SENNA_Hash *psg_right_hash;
+  /* Action objects */
+  SENNA_Tokenizer *tokenizer;
+  SENNA_POS *pos;
+} SENNA_fields;
+
 void* SENNA_new() {
-  return;
+  /* Initialize SENNA toolkit components: */
+  char *opt_path = "senna/";
+  SENNA_fields* SENNA_object = malloc(sizeof(SENNA_fields));
+  /* SENNA inputs */
+  SENNA_object->word_hash = SENNA_Hash_new(opt_path, "hash/words.lst");
+  SENNA_object->caps_hash = SENNA_Hash_new(opt_path, "hash/caps.lst");
+  SENNA_object->suff_hash = SENNA_Hash_new(opt_path, "hash/suffix.lst");
+  SENNA_object->gazt_hash = SENNA_Hash_new(opt_path, "hash/gazetteer.lst");
+
+  SENNA_object->gazl_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.loc.lst", "data/ner.loc.dat");
+  SENNA_object->gazm_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.msc.lst", "data/ner.msc.dat");
+  SENNA_object->gazo_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.org.lst", "data/ner.org.dat");
+  SENNA_object->gazp_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.per.lst", "data/ner.per.dat");
+
+  /* SENNA labels */
+  SENNA_object->pos_hash = SENNA_Hash_new(opt_path, "hash/pos.lst");
+  SENNA_object->chk_hash = SENNA_Hash_new(opt_path, "hash/chk.lst");
+  SENNA_object->pt0_hash = SENNA_Hash_new(opt_path, "hash/pt0.lst");
+  SENNA_object->ner_hash = SENNA_Hash_new(opt_path, "hash/ner.lst");
+  SENNA_object->vbs_hash = SENNA_Hash_new(opt_path, "hash/vbs.lst");
+  SENNA_object->srl_hash = SENNA_Hash_new(opt_path, "hash/srl.lst");
+  SENNA_object->psg_left_hash = SENNA_Hash_new(opt_path, "hash/psg-left.lst");
+  SENNA_object->psg_right_hash = SENNA_Hash_new(opt_path, "hash/psg-right.lst");
+
+  SENNA_object->tokenizer = SENNA_Tokenizer_new(
+    SENNA_object->word_hash,
+    SENNA_object->caps_hash,
+    SENNA_object->suff_hash,
+    SENNA_object->gazt_hash,
+    SENNA_object->gazl_hash,
+    SENNA_object->gazm_hash,
+    SENNA_object->gazo_hash,
+    SENNA_object->gazp_hash,
+    1); // TODO: The 1 is a parameter, change back to a parametric "is it tokenized?"
+  
+  SENNA_object->pos = SENNA_POS_new(opt_path, "data/pos.dat");
+
+  return (void*)SENNA_object;
+}
+
+void DESTROY(SENNA_fields* SENNA_object) {
+  free((void*)SENNA_object);
 }
 
 // json_object* dom_to_pos_annotations (xmlDocPtr doc) {
@@ -68,32 +133,7 @@ void* SENNA_new() {
 //     }
 //   }
 
-//   /* Initialize SENNA toolkit components: */
-//   int *pos_labels = NULL;
-//   char *opt_path = "../third-party/senna/";
-//   /* SENNA inputs */
-//   SENNA_Hash *word_hash = SENNA_Hash_new(opt_path, "hash/words.lst");
-//   SENNA_Hash *caps_hash = SENNA_Hash_new(opt_path, "hash/caps.lst");
-//   SENNA_Hash *suff_hash = SENNA_Hash_new(opt_path, "hash/suffix.lst");
-//   SENNA_Hash *gazt_hash = SENNA_Hash_new(opt_path, "hash/gazetteer.lst");
 
-//   SENNA_Hash *gazl_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.loc.lst", "data/ner.loc.dat");
-//   SENNA_Hash *gazm_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.msc.lst", "data/ner.msc.dat");
-//   SENNA_Hash *gazo_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.org.lst", "data/ner.org.dat");
-//   SENNA_Hash *gazp_hash = SENNA_Hash_new_with_admissible_keys(opt_path, "hash/ner.per.lst", "data/ner.per.dat");
-
-//   /* SENNA labels */
-//   SENNA_Hash *pos_hash = SENNA_Hash_new(opt_path, "hash/pos.lst");
-//   SENNA_Hash *chk_hash = SENNA_Hash_new(opt_path, "hash/chk.lst");
-//   SENNA_Hash *pt0_hash = SENNA_Hash_new(opt_path, "hash/pt0.lst");
-//   SENNA_Hash *ner_hash = SENNA_Hash_new(opt_path, "hash/ner.lst");
-//   SENNA_Hash *vbs_hash = SENNA_Hash_new(opt_path, "hash/vbs.lst");
-//   SENNA_Hash *srl_hash = SENNA_Hash_new(opt_path, "hash/srl.lst");
-//   SENNA_Hash *psg_left_hash = SENNA_Hash_new(opt_path, "hash/psg-left.lst");
-//   SENNA_Hash *psg_right_hash = SENNA_Hash_new(opt_path, "hash/psg-right.lst");
-
-//   SENNA_Tokenizer *tokenizer = SENNA_Tokenizer_new(word_hash, caps_hash, suff_hash, gazt_hash, gazl_hash, gazm_hash, gazo_hash, gazp_hash, 1);
-//   SENNA_POS *pos = SENNA_POS_new(opt_path, "data/pos.dat");
 
 //   /* Response JSON object */
 //   json_object* response = json_object_new_object();

@@ -10,5 +10,5 @@ my $eval_return = eval {
 
 ok($eval_return && !$@, 'Lingua::EN::SENNA module loaded successfully.');
 
-my $tagger = Lingua::EN::SENNA->new(POS=>1);
+my $tagger = Lingua::EN::SENNA->new();
 ok($tagger, 'Can initialize a Lingua::EN::SENNA tagger');

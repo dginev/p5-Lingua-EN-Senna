@@ -11,10 +11,14 @@ MODULE = Lingua::EN::SENNA               PACKAGE = Lingua::EN::SENNA
 
 PROTOTYPES: ENABLE
 
-
 Lingua::EN::SENNA
-new()
+new(package)
+  char* package
   CODE:
     RETVAL=SENNA_new();
   OUTPUT:
     RETVAL
+
+void
+DESTROY(SENNA_object)
+  Lingua::EN::SENNA SENNA_object
