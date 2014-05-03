@@ -20,7 +20,7 @@ WriteMakefile (
     VERSION_FROM => 'lib/Lingua/EN/SENNA.pm',
     INC => "-ISENNA_API -Isenna",
     # LIBS => "-LSENNA_API -Lsenna",
-    CCFLAGS=>"-ffast-math",
+    CCFLAGS=>"-ffast-math -Wall",
     OPTIMIZE =>'-O3 -g',
     clean => {FILES=>'*$(OBJ_EXT)'},
     OBJECT => 'SENNA_CHK$(OBJ_EXT) SENNA_Hash$(OBJ_EXT) SENNA_main$(OBJ_EXT) SENNA_NER$(OBJ_EXT) SENNA_nn$(OBJ_EXT) 
