@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-use Data::Dumper;
 
 use Test::More tests => 2;
 use Lingua::EN::SENNA;
@@ -18,29 +17,29 @@ my $sentences = ["The fox swallowed the cheese",
                  "He likes to code and sing but not to dance"];
 my $tokens_array = $tagger->tokenize($sentences);
 my $expected_tokens_array = [
-          [
-            'The',
-            'fox',
-            'swallowed',
-            'the',
-            'cheese'
-          ],
-          [
-            'John',
-            'loves',
-            'Mary'
-          ],
-          [
-            'He',
-            'likes',
-            'to',
-            'code',
-            'and',
-            'sing',
-            'but',
-            'not',
-            'to',
-            'dance'
-          ]
-        ];
+  [
+    'The',
+    'fox',
+    'swallowed',
+    'the',
+    'cheese'
+  ],
+  [
+    'John',
+    'loves',
+    'Mary'
+  ],
+  [
+    'He',
+    'likes',
+    'to',
+    'code',
+    'and',
+    'sing',
+    'but',
+    'not',
+    'to',
+    'dance'
+  ]
+];
 is_deeply($tokens_array,$expected_tokens_array,"Tokenization on 3 sentences");

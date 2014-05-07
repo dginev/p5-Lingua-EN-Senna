@@ -60,21 +60,3 @@ SENNA_Tokens* SENNA_Tokenize_sentence(SENNA_fields* SENNA_object, char* sentence
      SENNA_Tokens* tokens = SENNA_Tokenizer_tokenize(SENNA_object->tokenizer, sentence);
      return tokens;
 }
-
-void* SENNA_POS_sentence(SENNA_fields* SENNA_object, char* sentence) {
-  SENNA_Tokens* tokens = SENNA_Tokenize_sentence(SENNA_object,sentence);
-  /* Obtain the corresponding list of POS tags for the list of words */
-  int *pos_labels = NULL;
-  pos_labels = SENNA_POS_forward(SENNA_object->pos, tokens->word_idx, tokens->caps_idx, tokens->suff_idx, tokens->n);
-  int token_index;
-  for(token_index = 0; token_index < tokens->n; token_index++) {}
-  //     json_object_object_add(response,ids[token_index],
-  //                           json_object_new_string(SENNA_Hash_key(pos_hash, pos_labels[token_index])));
-  // }  
-  return tokens; // Tentative stub
-}
-
-void* SENNA_fullproc_sentence(SENNA_fields* SENNA_object, char* sentence) {
-  SENNA_Tokens* tokens = SENNA_Tokenize_sentence(SENNA_object,sentence);
-  return tokens;
-}

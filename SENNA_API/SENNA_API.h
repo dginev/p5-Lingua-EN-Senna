@@ -31,5 +31,3 @@ typedef struct {
 void* SENNA_new();
 void DESTROY(SENNA_fields* SENNA_object);
 SENNA_Tokens* SENNA_Tokenize_sentence(SENNA_fields* SENNA_object, char* sentence);
-void* SENNA_POS_sentence(SENNA_fields* SENNA_object, char* sentence);
-void* SENNA_fullproc_sentence(SENNA_fields* SENNA_object, char* sentence);
