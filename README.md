@@ -1,5 +1,6 @@
 Lingua::EN::Senna
 ==================
+[![Build Status](https://secure.travis-ci.org/dginev/p5-Lingua-EN-Senna.png?branch=master)](http://travis-ci.org/dginev/p5-Lingua-EN-Senna)
 
 Perl5 wrapper for the SENNA NLP toolkit.
 
