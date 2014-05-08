@@ -41,6 +41,6 @@ typedef struct {
 
 } SENNA_fields;
 
-void* SENNA_new();
+void* SENNA_new(char* SENNA_path);
 void DESTROY(SENNA_fields* SENNA_object);
 SENNA_Tokens* SENNA_Tokenize_sentence(SENNA_fields* SENNA_object, char* sentence);

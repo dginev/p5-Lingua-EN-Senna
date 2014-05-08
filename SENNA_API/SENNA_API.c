@@ -17,9 +17,8 @@
 // Senna API
 #include "SENNA_API.h"
 
-void* SENNA_new() {
+void* SENNA_new(char* opt_path) {
   /* Initialize SENNA toolkit components: */
-  char *opt_path = "senna/";
   SENNA_fields* SENNA_object = malloc(sizeof(SENNA_fields));
   /* SENNA inputs */
   SENNA_object->word_hash = SENNA_Hash_new(opt_path, "hash/words.lst");

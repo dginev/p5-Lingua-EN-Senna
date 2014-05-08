@@ -17,7 +17,10 @@ new(package)
   char* package
   CODE:
     UNUSED(package);
-    RETVAL=SENNA_new();
+    STRLEN len;
+    SV* SENNA_path = get_sv("Lingua::EN::SENNA::SENNA_path",0);
+    char* value = SvPV(SENNA_path, len);
+    RETVAL=SENNA_new(value);
   OUTPUT:
     RETVAL
 

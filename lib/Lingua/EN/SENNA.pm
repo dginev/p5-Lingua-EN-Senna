@@ -1,5 +1,9 @@
 package Lingua::EN::SENNA;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
+
+our $SENNA_path = $INC{"Lingua/EN/SENNA.pm"};
+$SENNA_path =~ s/\.pm$/\/third-party\/senna\//;
+
 require XSLoader;
 XSLoader::load('Lingua::EN::SENNA', $VERSION);
 
