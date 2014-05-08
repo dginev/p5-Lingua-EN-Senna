@@ -3,6 +3,12 @@
 #include "SENNA_Hash.h"
 #include "SENNA_Tokenizer.h"
 #include "SENNA_POS.h"
+#include "SENNA_CHK.h"
+#include "SENNA_NER.h"
+#include "SENNA_VBS.h"
+#include "SENNA_PT0.h"
+#include "SENNA_SRL.h"
+#include "SENNA_PSG.h"
 
 typedef struct {
   /* SENNA inputs */
@@ -26,6 +32,13 @@ typedef struct {
   /* Action objects */
   SENNA_Tokenizer *tokenizer;
   SENNA_POS *pos;
+  SENNA_CHK *chk;
+  SENNA_PT0 *pt0;
+  SENNA_NER *ner;
+  SENNA_VBS *vbs;
+  SENNA_SRL *srl;
+  SENNA_PSG *psg;
+
 } SENNA_fields;
 
 void* SENNA_new();

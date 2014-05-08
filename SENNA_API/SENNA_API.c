@@ -8,6 +8,13 @@
 #include "SENNA_Hash.h"
 #include "SENNA_Tokenizer.h"
 #include "SENNA_POS.h"
+#include "SENNA_CHK.h"
+#include "SENNA_NER.h"
+#include "SENNA_VBS.h"
+#include "SENNA_PT0.h"
+#include "SENNA_SRL.h"
+#include "SENNA_PSG.h"
+// Senna API
 #include "SENNA_API.h"
 
 void* SENNA_new() {
@@ -47,11 +54,46 @@ void* SENNA_new() {
     1); // TODO: The 1 is a parameter, change back to a parametric "is it tokenized?"
   
   SENNA_object->pos = SENNA_POS_new(opt_path, "data/pos.dat");
+  SENNA_object->chk = SENNA_CHK_new(opt_path, "data/chk.dat");
+  SENNA_object->pt0 = SENNA_PT0_new(opt_path, "data/pt0.dat");
+  SENNA_object->ner = SENNA_NER_new(opt_path, "data/ner.dat");
+  SENNA_object->vbs = SENNA_VBS_new(opt_path, "data/vbs.dat");
+  SENNA_object->srl = SENNA_SRL_new(opt_path, "data/srl.dat");
+  SENNA_object->psg = SENNA_PSG_new(opt_path, "data/psg.dat");
 
   return (void*)SENNA_object;
 }
 
 void DESTROY(SENNA_fields* SENNA_object) {
+  SENNA_Tokenizer_free(SENNA_object->tokenizer);
+
+  SENNA_POS_free(SENNA_object->pos);
+  SENNA_CHK_free(SENNA_object->chk);
+  SENNA_PT0_free(SENNA_object->pt0);
+  SENNA_NER_free(SENNA_object->ner);
+  SENNA_VBS_free(SENNA_object->vbs);
+  SENNA_SRL_free(SENNA_object->srl);
+  SENNA_PSG_free(SENNA_object->psg);
+
+  SENNA_Hash_free(SENNA_object->word_hash);
+  SENNA_Hash_free(SENNA_object->caps_hash);
+  SENNA_Hash_free(SENNA_object->suff_hash);
+  SENNA_Hash_free(SENNA_object->gazt_hash);
+
+  SENNA_Hash_free(SENNA_object->gazl_hash);
+  SENNA_Hash_free(SENNA_object->gazm_hash);
+  SENNA_Hash_free(SENNA_object->gazo_hash);
+  SENNA_Hash_free(SENNA_object->gazp_hash);
+
+  SENNA_Hash_free(SENNA_object->pos_hash);
+  SENNA_Hash_free(SENNA_object->chk_hash);
+  SENNA_Hash_free(SENNA_object->pt0_hash);
+  SENNA_Hash_free(SENNA_object->ner_hash);
+  SENNA_Hash_free(SENNA_object->vbs_hash);
+  SENNA_Hash_free(SENNA_object->srl_hash);
+  SENNA_Hash_free(SENNA_object->psg_left_hash);
+  SENNA_Hash_free(SENNA_object->psg_right_hash);
+
   free((void*)SENNA_object);
 }
 
