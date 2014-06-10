@@ -110,12 +110,11 @@ AV* analyze(Lingua_SENNA_object, sentences, options)
     int opt_ner = 0;
     int opt_srl = 0;
     int opt_psg = 0;
-    if (hv_exists(options,"POS",3)) { opt_pos = 1; }
-    if (hv_exists(options,"CHK",3)) { opt_chk = 1; }
-    if (hv_exists(options,"NER",3)) { opt_ner = 1; }
-    if (hv_exists(options,"SRL",3)) { opt_srl = 1; }
-    if (hv_exists(options,"PSG",3)) { opt_psg = 1; }
-    // TODO: Cover all options
+    if hv_exists(options,"POS",3) { opt_pos = 1; }
+    if hv_exists(options,"CHK",3) { opt_pos = 1; opt_chk = 1; }
+    if hv_exists(options,"NER",3) { opt_pos = 1; opt_ner = 1; }
+    if hv_exists(options,"SRL",3) { opt_pos = 1; opt_chk = 1; opt_srl = 1; }
+    if hv_exists(options,"PSG",3) { opt_pos = 1; opt_chk = 1; opt_psg = 1; }
 
     /* Next, analyze sentences as requested */
     SENNA_fields* SENNA_object = (SENNA_fields*) Lingua_SENNA_object;
