@@ -27,4 +27,13 @@ WriteMakefile (
 							 SENNA_POS$(OBJ_EXT) SENNA_PSG$(OBJ_EXT) SENNA_PT0$(OBJ_EXT) SENNA_Scores2Treillis$(OBJ_EXT)
 							 SENNA_SRL$(OBJ_EXT) SENNA_Tokenizer$(OBJ_EXT) SENNA_Treillis$(OBJ_EXT)
 							 SENNA_utils$(OBJ_EXT) SENNA_VBS$(OBJ_EXT)  SENNA_API$(OBJ_EXT) SENNA$(OBJ_EXT)',
+    (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
+    'meta-spec' => { version => 2 },
+      resources => {
+        repository => {
+          type => 'git',
+          url => 'https://github.com/dginev/nnexus.git',
+          web => 'https://github.com/dginev/nnexus',
+        }}})
+  : ())
 );
