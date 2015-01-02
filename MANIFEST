@@ -72,6 +72,7 @@ lib/Lingua/EN/SENNA/third-party/senna/SENNA_VBS.c
 lib/Lingua/EN/SENNA/third-party/senna/SENNA_VBS.h
 LICENSE
 Makefile.PL
+Changes
 MANIFEST			This list of files
 ppport.h
 README.md
