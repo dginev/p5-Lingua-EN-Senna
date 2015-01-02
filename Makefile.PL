@@ -32,8 +32,8 @@ WriteMakefile (
       resources => {
         repository => {
           type => 'git',
-          url => 'https://github.com/dginev/nnexus.git',
-          web => 'https://github.com/dginev/nnexus',
+          url => 'https://github.com/dginev/p5-Lingua-EN-Senna.git',
+          web => 'https://github.com/dginev/p5-Lingua-EN-Senna',
         }}})
   : ())
 );

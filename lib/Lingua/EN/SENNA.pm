@@ -1,5 +1,8 @@
 package Lingua::EN::SENNA;
-our $VERSION = '0.03';
+use strict;
+use warnings;
+
+our $VERSION = '0.04';
 
 our $SENNA_path = $INC{"Lingua/EN/SENNA.pm"};
 $SENNA_path =~ s/\.pm$/\/third-party\/senna\//;
